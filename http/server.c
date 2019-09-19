@@ -22,14 +22,12 @@ int main(int argc, char const *argv[])
         perror("In socket");
         exit(EXIT_FAILURE);
     }
-    
 
     address.sin_family = AF_INET;
     address.sin_addr.s_addr = INADDR_ANY;
     address.sin_port = htons( PORT );
     
     memset(address.sin_zero, '\0', sizeof address.sin_zero);
-    
     
     if (bind(server_fd, (struct sockaddr *)&address, sizeof(address))<0)
     {
