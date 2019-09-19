@@ -121,13 +121,14 @@ void parseMessage(char mensajeRec[])
 	if (fptr == NULL)
 	{
 		printf("Cannot open file \n");
-		exit(0);
+		exit(EXIT_FAILURE);
 	}
 
 	// fprintf(fptr, "%c", bufferHeader);
 
 	bufferHeader[headerSize] = '\0';
-	printf("%s\n", bufferHeader);
+	// printf("%s\n", bufferHeader);
+	fprintf(fptr, "%s", bufferHeader);
 	bufferBody[bodySize] = '\0';
 	printf("%s\n", bufferBody);
 }
