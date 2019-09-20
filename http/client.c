@@ -105,15 +105,12 @@ void parseMessage(char mensajeRec[])
 		{
 			bufferHeader += mensaje[i];
 			printf("%c", mensaje[i]);
-			// fputs(mensaje[i],fptr);
 		}
 		else
 		{
 			bufferBody += mensaje[i];
 			printf("%c", mensaje[i]);
-			char m = mensaje[i];
-			printf("%c\n", m);
-			fputs(m, fp);
+			//fputs(mensaje[i], fp);// tira violacion de segmento, no puedo imprimir
 		}
 
 		if (mensaje[i] == '\n' && mensaje[i + 1] == '\n')
@@ -138,5 +135,5 @@ void parseMessage(char mensajeRec[])
 	// bufferBody[bodySize-1] = '\0';
 	// fprintf("%s\n", bufferBody);
 
-	fclose(fptr);
+	fclose(fp);
 }
