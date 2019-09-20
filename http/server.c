@@ -67,7 +67,6 @@ int main(int argc, char const *argv[])
 
         valread = read(new_socket, request, 30000); // leemos la http request
         printf("%s\n", request);
-        fputs(fp,request);
         // validateRequest(request);
         // printf("Valid: %s\n", valid);
         // if (valid == 0) // valido
