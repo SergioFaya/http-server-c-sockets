@@ -36,20 +36,18 @@ main(int argc, char *argv[])
 	dirServ.sin_port = htons(port); /* servidor de echo */
 
 	res = connect(s, &dirServ, sizeof(dirServ));
-	printf("%i\n", res);
 
 	if (res < 0)
 	{
 		perror("Error en connect");
-		exit(0);
+		exit(EXIT_FAILURE);
 	}
 
 	int writen = write(s, mensajeEnv, strlen(mensajeEnv));
-	printf("%i\n", writen);
 	if (writen < 0)
 	{
 		perror("Error en write");
-		exit(0);
+		exit(EXIT_FAILURE);
 	}
 
 	int n = 0;
@@ -89,14 +87,12 @@ void parseMessage(char mensajeRec[])
 	int storeInHeader = 1;
 	FILE *fp;
 
-	fp = fopen("file.txt", "w+");
+	fp = fopen("response.txt", "w+");
 	if (fp == NULL)
 	{
 		perror("Cannot open file \n");
 		exit(EXIT_FAILURE);
 	}
-
-	fputs("This is c programming.", fp);
 
 	for (int i = 0; mensaje[i] != '\0'; ++i)
 	{
@@ -110,7 +106,6 @@ void parseMessage(char mensajeRec[])
 		{
 			bufferBody += mensaje[i];
 			printf("%c", mensaje[i]);
-			//fputs(mensaje[i], fp);// tira violacion de segmento, no puedo imprimir
 		}
 
 		if (mensaje[i] == '\n' && mensaje[i + 1] == '\n')
@@ -127,6 +122,20 @@ void parseMessage(char mensajeRec[])
 
 	printf("caracteres usuario header %i\n", headerSize);
 	printf("caracteres de body %i\n", bodySize);
+
+	fputs(mensaje,fp);
+// char final[10000];
+// 	printf("aquí\n");
+
+// bufferBody[bodySize] = NULL;
+// 	printf("aquí\n");
+
+// strcpy(final, bufferBody);
+// 	printf("aquí\n");
+
+	// bufferBody[bodySize] = '\0';
+	// fputs(bufferBody, fp);// tira violacion de segmento, no puedo imprimir
+
 
 	// fprintf(fptr, "%c", bufferHeader);
 
